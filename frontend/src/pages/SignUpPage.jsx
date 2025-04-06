@@ -2,19 +2,20 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { UserPlus, Mail, Lock, User, ArrowRight, Loader } from "lucide-react";
 import { motion } from "framer-motion";
+import { useUserStore } from "../stores/useUserStore";
 
 const SignUpPage = () => {
-  const loading = true;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: ""
   })
+  const { signup, loading } = useUserStore();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData)
+    signup(formData)
   }
   return (
     <div className='flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
@@ -127,9 +128,9 @@ const SignUpPage = () => {
             rounded-md shadow-sm text-sm font-medium text-white bg-emerald-600
              hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2
               focus:ring-emerald-500 transition duration-150 ease-in-out disabled:opacity-50'
-            
-            > Sign up
-              {/* {loading ? (
+              disabled={loading}
+            >
+              {loading ? (
                 <>
                   <Loader className='mr-2 h-5 w-5 animate-spin' aria-hidden='true' />
                   Loading...
@@ -139,7 +140,7 @@ const SignUpPage = () => {
                   <UserPlus className='mr-2 h-5 w-5' aria-hidden='true' />
                   Sign up
                 </>
-              )} */}
+              )}
             </button>
           </form>
 

@@ -2,14 +2,16 @@ import React, { useState } from 'react'
 import { motion } from "framer-motion";
 import { LogIn, Mail, Lock, ArrowRight, Loader } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useUserStore } from '../stores/useUserStore';
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login, loading } = useUserStore();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    login(email, password);
   };
 
   return (
@@ -81,8 +83,9 @@ const LoginPage = () => {
 							rounded-md shadow-sm text-sm font-medium text-white bg-emerald-600
 							 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2
 							  focus:ring-emerald-500 transition duration-150 ease-in-out disabled:opacity-50'
-            > Login
-              {/* {loading ? (
+              disabled={loading}
+            >
+              {loading ? (
                 <>
                   <Loader className='mr-2 h-5 w-5 animate-spin' aria-hidden='true' />
                   Loading...
@@ -92,7 +95,7 @@ const LoginPage = () => {
                   <LogIn className='mr-2 h-5 w-5' aria-hidden='true' />
                   Login
                 </>
-              )} */}
+              )}
             </button>
           </form>
 

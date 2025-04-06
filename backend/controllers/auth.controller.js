@@ -29,7 +29,7 @@ const setCookies = (res, accessToken, refreshToken) => {
     });
 };
 export const signup = async (req, res) => {
-    const { email, password, name } = req.body;
+    const {name, email, password} = req.body;
     try {
         const userExists = await User.findOne({ email })
         if (userExists) {
