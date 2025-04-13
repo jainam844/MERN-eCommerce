@@ -148,7 +148,8 @@ const CreateProductForm = () => {
             </>
           )}
         </button>
-      </form></motion.div>
+      </form>
+    </motion.div>
   )
 }
 
